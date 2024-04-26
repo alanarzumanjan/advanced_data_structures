@@ -17,5 +17,5 @@ clean:
 	
 push:
 	git add .
-	git commit -a -m "mark super sexy pony"
+	git commit -a -m "yes"
 	git push origin main
