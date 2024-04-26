@@ -80,7 +80,7 @@
 
 ```mermaid
 ---
-title: LinkedList and Stack realization
+title: Examples Realization
 ---
 classDiagram
     class MAINCPP
