@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 class Node
@@ -118,9 +120,157 @@ public:
     }
 };
 
+class Queue : public Stack
+{
+private:
+    Stack inbox;
+    Stack outbox;
+
+public:
+    void enqueue(int data)
+    {
+        inbox.push(data);
+    }
+
+    int dequeue()
+    {
+        if (outbox.is_empty())
+        {
+            while (!inbox.is_empty())
+            {
+                outbox.push(inbox.pop());
+            }
+        }
+
+        if (outbox.is_empty())
+        {
+            cout << "Queue is empty\n";
+            return -1;
+        }
+
+        return outbox.pop();
+    }
+
+    bool is_empty()
+    {
+        return inbox.is_empty() && outbox.is_empty();
+    }
+
+    int size()
+    {
+        return inbox.size() + outbox.size();
+    }
+};
+bool isOperator(char c)
+{
+    return c == '+' || c == '-' || c == '*' || c == '/';
+}
+
+int precedence(char c)
+{
+    if (c == '+' || c == '-')
+        return 1;
+    if (c == '*' || c == '/')
+        return 2;
+    return 0;
+}
+
+string infixToPrefix(string infix)
+{
+    Stack operators;
+    string result;
+
+    // Reverse the infix expression
+    reverse(infix.begin(), infix.end());
+
+    for (char &c : infix)
+    {
+        // Handle operands
+        if (isdigit(c))
+        {
+            result += c;
+        }
+        // Handle operators
+        else if (isOperator(c))
+        {
+            while (!operators.is_empty() && precedence(operators.peek()) >= precedence(c))
+            {
+                result += operators.pop();
+            }
+            operators.push(c);
+        }
+        // Handle parentheses
+        else if (c == ')')
+        {
+            operators.push(c);
+        }
+        else if (c == '(')
+        {
+            while (!operators.is_empty() && operators.peek() != ')')
+            {
+                result += operators.pop();
+            }
+            operators.pop(); // Discard the opening parenthesis
+        }
+    }
+
+    // Pop remaining operators from the stack
+    while (!operators.is_empty())
+    {
+        result += operators.pop();
+    }
+
+    // Reverse the result string to get the final prefix expression
+    reverse(result.begin(), result.end());
+
+    return result;
+}
+
+int evaluatePrefix(string prefix)
+{
+    Stack operands;
+
+    // Reverse the prefix expression to start from left
+    reverse(prefix.begin(), prefix.end());
+
+    for (char &c : prefix)
+    {
+        if (isdigit(c))
+        {
+            operands.push(c - '0'); // Convert char to int
+            
+        }
+        else if (isOperator(c))
+        {
+            int operand1 = operands.pop();
+            int operand2 = operands.pop();
+            switch (c)
+            {
+            case '+':
+                operands.push(operand1 + operand2);
+                break;
+            case '-':
+                operands.push(operand1 - operand2);
+                break;
+            case '*':
+                operands.push(operand1 * operand2);
+                break;
+            case '/':
+                operands.push(operand1 / operand2);
+                break;
+            }
+        }
+    }
+
+    // The result will be at the top of the stack
+    return operands.peek();
+}
+
 int main()
-{ 
+{
     // Linked List realization
+    cout << "============>" << endl;
+    cout << "LINKEDLIST REALIZATION" << endl;
     LinkedList list;
     list.append(1);
     list.append(4);
@@ -139,6 +289,8 @@ int main()
     list.ListDisplay();
 
     // Stack realization
+    cout << "============>" << endl;
+    cout << "STACK REALIZATION" << endl;
     Stack stack;
     cout << "Not push - Size: " << stack.size() << endl;
     stack.push(1);
@@ -174,16 +326,38 @@ int main()
         cout << "Stack is not empty" << endl;
     }
 
-    cout << "Before all - Size: " << stack.size() << endl;
 
-    cout << "After deletion - Size: " << stack.size() << endl;
-    if (stack.is_empty())
+    // Queue with 2 stacks
+    Queue queue;
+    cout << "============>" << endl;
+    cout << "QUEUE WITH 2 STACKS REALIZATION" << endl;
+
+    cout << "Queue size: " << queue.size() << endl;
+    queue.enqueue(3);
+    queue.enqueue(9);
+    queue.enqueue(31);
+    queue.enqueue(-9);
+    queue.enqueue(5);
+    queue.enqueue(16);
+    cout << "Queue size: " << queue.size() << endl;
+
+    // Проверка операции dequeue
+    cout << "Dequeuing elements: ";
+    while (!queue.is_empty())
     {
-        cout << "Stack is empty" << endl;
+        cout << "Elem: "<< queue.dequeue() << endl;
+        cout << "Queue size: " << queue.size() << endl;
     }
-    else
-    {
-        cout << "Stack is not empty" << endl;
-    }
+    cout << endl;
+
+    // CONVERT BLAT 3 uzdevums
+    string infixExpression = "(1+3)*17-(12+4)";
+    cout << "Infix Expression: " << infixExpression << endl;
+
+    string prefixExpression = infixToPrefix(infixExpression);
+    cout << "Prefix Expression: " << prefixExpression << endl;
+
+    int result = evaluatePrefix(prefixExpression);
+    cout << "Result: " << result << endl;
     return 0;
 }

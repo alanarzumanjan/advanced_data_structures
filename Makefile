@@ -7,7 +7,7 @@ CFLAGS = -lm -std=c++14
 all: clean build run
 
 build:
-	$(CC) $(SRC_FILE) -o $(TARGET) $(CFLAGS)
+	$(CC) $(SRC_FILE) -o $(TARGET) 
 
 run:
 	./$(TARGET)
