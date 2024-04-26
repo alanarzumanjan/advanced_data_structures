@@ -95,7 +95,7 @@
 title: LinkedList and Stack realization
 ---
 classDiagram
-    class maincpp
+    class MAINCPP
 
     class LinkedList
     LinkedList : realization
@@ -103,8 +103,18 @@ classDiagram
     class Stack
     Stack : realization
 
-    LinkedList --> maincpp
-    Stack --> maincpp
+    class QueuewithTwoStaks
+    QueuewithTwoStaks : realization
+
+    class Convert
+    Convert : gemoroj
+    Convert : stradanie
+    Convert : staranie
+
+    LinkedList --> MAINCPP
+    Stack --> MAINCPP
+    QueuewithTwoStaks --> MAINCPP
+    Convert --> MAINCPP
 
 ```
 
