@@ -17,5 +17,5 @@ clean:
 	
 push:
 	git add .
-	git commit -a -m "yes"
+	git commit -a -m "."
 	git push origin main 
