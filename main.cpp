@@ -69,6 +69,61 @@ public:
         }
         head = prev;
     }
+    void sort()
+    {
+        Node *prev_node = nullptr;
+        Node *current_node = head;
+        Node *next_node = current_node->next;
+        Node *new_head = head;
+        Node *min_node = head;
+        Node *before_min = prev_node;
+        Node *after_min = next_node;
+        Node *unsorted_starts_here = head;
+        Node *sorted_ends_here = nullptr;
+
+        while (true)
+        {
+            current_node = unsorted_starts_here;
+            while (current_node != nullptr)
+            {
+                if (current_node->data <= min_node->data)
+                {
+                    before_min = prev_node;
+                    min_node = current_node;
+                    after_min = next_node;
+                }
+
+                prev_node = current_node;
+                current_node = current_node->next;
+
+                if (current_node != nullptr)
+                    next_node = current_node->next;
+            }
+
+            if (min_node == unsorted_starts_here)
+            {
+                unsorted_starts_here = unsorted_starts_here->next;
+            }
+
+            min_node->next = new_head;
+            if (sorted_ends_here == nullptr)
+            {
+                sorted_ends_here = min_node;
+            }
+            new_head = min_node;
+            before_min->next = after_min;
+            min_node = unsorted_starts_here;
+
+            if (min_node == nullptr)
+            {
+                break;
+            }
+
+            next_node = unsorted_starts_here->next;
+            prev_node = sorted_ends_here;
+        }
+        head = new_head;
+    }
 };
 
 // Stack realization
@@ -162,6 +217,19 @@ public:
         return first_stack.size() + second_stack.size();
     }
 };
+// bonus
+void deleteStack(Stack &stack)
+{
+    Node *current = stack.head;
+    while (current != nullptr)
+    {
+        Node *temp = current;
+        current = current->next;
+        delete temp;
+    }
+    stack.head = nullptr;
+    stack.len = 0;
+}
 
 // CONVERT
 bool is_operator(char c)
@@ -291,6 +359,10 @@ int main()
     list.ReverseList();
     list.ListDisplay();
 
+    cout << "Sort List: ";
+    list.sort();
+    list.ListDisplay();
+
     // Stack realization test
     Stack stack;
     cout << endl
@@ -330,6 +402,10 @@ int main()
     {
         cout << "Stack is not empty" << endl;
     }
+    // bonus
+    deleteStack(stack);
+
+    cout << "After deletion - Size: " << stack.size() << endl;
 
     // Queue with 2 stacks test
     Queue queue;
