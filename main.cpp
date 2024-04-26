@@ -16,6 +16,7 @@ public:
     }
 };
 
+// Linked List realization
 class LinkedList
 {
 public:
@@ -69,6 +70,7 @@ public:
         head = prev;
     }
 };
+
 // Stack realization
 class Stack : public LinkedList
 {
@@ -90,7 +92,6 @@ public:
     int pop()
     {
         int ret_val = head->data;
-
         head = head->next;
         len--;
         return ret_val;
@@ -231,7 +232,7 @@ string infix_to_prefix(string infix)
     return result;
 }
 
-int evaluate(string prefix)
+int calc(string prefix)
 {
     Stack operands;
 
@@ -292,7 +293,8 @@ int main()
 
     // Stack realization test
     Stack stack;
-    cout << "============>" << endl;
+    cout << endl
+         << "============>" << endl;
     cout << "STACK REALIZATION" << endl;
 
     cout << "Size: " << stack.size() << endl;
@@ -331,7 +333,8 @@ int main()
 
     // Queue with 2 stacks test
     Queue queue;
-    cout << "============>" << endl;
+    cout << endl
+         << "============>" << endl;
     cout << "QUEUE WITH 2 STACKS REALIZATION" << endl;
 
     cout << "Queue size: " << queue.size() << endl;
@@ -343,7 +346,7 @@ int main()
     queue.enqueue(16);
     cout << "Queue size: " << queue.size() << endl;
 
-    cout << "Dequeuing elements: ";
+    cout << "Dequeuing elements: " << endl;
     while (!queue.is_empty())
     {
         cout << "Elem: " << queue.dequeue() << endl;
@@ -358,7 +361,7 @@ int main()
     string prefix = infix_to_prefix(infix);
     cout << "Prefix: " << prefix << endl;
 
-    int result = evaluate(prefix);
+    int result = calc(prefix);
     cout << "Result: " << result << endl;
     return 0;
 }
