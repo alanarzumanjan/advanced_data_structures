@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+ 
 class Node
 {
 public:
@@ -217,6 +217,7 @@ public:
         return first_stack.size() + second_stack.size();
     }
 };
+
 // bonus
 void deleteStack(Stack &stack)
 {
@@ -402,6 +403,7 @@ int main()
     {
         cout << "Stack is not empty" << endl;
     }
+
     // bonus
     deleteStack(stack);
 
@@ -430,7 +432,7 @@ int main()
     }
     cout << endl;
 
-    // CONVERT BLAT 3 uzdevums test
+    // CONVERT 3 uzdevums test
     string infix = "(1+3)*17-(12+4)";
     cout << "Infix: " << infix << endl;
 
