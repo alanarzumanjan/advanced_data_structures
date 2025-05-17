@@ -1,4 +1,4 @@
-# 🔧 Test of school
+# 🔧 Advanced data structures and algorithms
 
 A C++ project implementing fundamental data structures and algorithms:
 
