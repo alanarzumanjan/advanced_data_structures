@@ -1,17 +1,17 @@
-# 🔧 Advanced data structures & algorithms
+# Advanced data structures & algorithms
 
 A C++ project implementing fundamental data structures and algorithms:
 
-- 🧩 Linked List  
-- 📚 Stack  
-- ⛓️ Queue (via two stacks)  
-- 🧮 Infix to Prefix conversion and evaluation  
+- Linked List  
+- Stack  
+- Queue (via two stacks)  
+- Infix to Prefix conversion and evaluation  
 
 Includes hands-on demonstrations and terminal commands for compiling and testing.
 
 ---
 
-## 🏗️ Features
+## Features
 
 - **Linked List** with append, display, reverse, and custom sort
 - **Stack** with push, pop, peek, and size
@@ -21,25 +21,25 @@ Includes hands-on demonstrations and terminal commands for compiling and testing
 
 ---
 
-## 🖥️ How to Run
+## How to Run
 
-### 🛠 Compile
+### Compile
 ```bash
 make
 ```
-🧹 Clean build files
+Clean build files
 ```
 make clean
 ```
 
-📁 Project Structure
+Project Structure
 
 ├── main.cpp         # All implementations and test cases<br>
 ├── Makefile         # Build automation<br>
 ├── README.md        # Project overview<br>
 ├── answers.md       # Theoretical explanations <br>
 
-### 📊 Visual Overview (Mermaid)
+### Visual Overview (Mermaid)
 
 ```mermaid
 classDiagram
